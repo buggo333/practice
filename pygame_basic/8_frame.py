@@ -47,4 +47,6 @@ while running:
 
 
 # pygame 종료
+
+#깃 연습
 pygame.quit()
