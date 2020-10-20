@@ -45,15 +45,24 @@ while running:
         if event.type == pygame.QUIT: # 창이 닫히는 이벤트가 발생하였는가?
             running = False # 게임이 진행중이 아님
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+        if event.type == pygame.KEYDOWN: #키가 눌러졌는지 확인
+            if event.key == pygame.K_LEFT: #캐릭터를 왼쪽으로
                 to_x -= character_speed
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT: #캐릭터를 오른쪽으로
                 to_x += character_speed
+            elif event.key == pygame.K_UP: #캐릭터를 위로
+                to_y -= character_speed
+            elif event.key == pygame.K_DOWN: #캐릭터를 아래로
+                to_y += character_speed
 
-        if event.type == pygame.KEYUP:
+        if event.type == pygame.KEYUP: #방향키를 떼면 멈춤
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 to_x = 0
+            elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                to_y = 0
+
+    character_x_pos += to_x * dt
+    character_y_pos += to_y * dt
         
     #3.게임 캐릭터 위치 정의    
     
@@ -65,10 +74,9 @@ while running:
     screen.blit(backgraound, (0,0))
     screen.blit(character, (character_x_pos, character_y_pos)
 
-    # pygame.display.update() #게임화면을 다시 그리기!
+    pygame.display.update() #게임화면을 다시 그리기!
 
 
 # pygame 종료
-
-#깃 연습
 pygame.quit()
+#깃 연습
