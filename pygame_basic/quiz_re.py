@@ -30,6 +30,15 @@ character_y_pos = screen_height - character_height # 화면 세로 크기 가장
 #이동 위치
 to_x = 0
 character_speed = 10
+
+#낙하물 코드
+ddong = pygame.image.load("C:/Users/김대기/Desktop/python git/practice/pygame_basic/enemy.png")
+ddong_size = ddong.get_rect().size #이미지의 크기를 구해옴
+ddong_width = ddong_size[0] # 캐릭터의 가로크기
+ddongddong_height = ddong_size[1] # 캐릭터의 세로크기
+ddong_x_pos = 0  #화면 가로의 절반 크기에 해당하는 곳에 위치(가로)
+ddong_y_pos = 0 # 화면 세로 크기 가장 아래에 해당하는 곳에 위치(세로)
+ddong_speed = 10
 # 이벤트 루프
 running = True #게임이 진행중인가?
 while running:
@@ -62,13 +71,14 @@ while running:
     elif character_x_pos > screen_width - character_width:
         character_x_pos = screen_width - character_width
 
+    ddong_y_pos += ddong_speed
     #4. 충돌 처리
 
     
     #5. 화면의 기르기
     screen.blit(backgruound, (0, 0))
     screen.blit(character, (character_x_pos, character_y_pos))
-
+    screen.blit(ddong, (ddong_x_pos, ddong_y_pos))
     pygame.display.update() #게임화면을 다시 그리기!
 
 
