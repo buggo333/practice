@@ -1,3 +1,4 @@
+import random
 import pygame
 ##########################################################################
 #기본 초기화 (반드시 해야 하는 것들)
@@ -36,7 +37,7 @@ ddong = pygame.image.load("C:/Users/김대기/Desktop/python git/practice/pygame
 ddong_size = ddong.get_rect().size #이미지의 크기를 구해옴
 ddong_width = ddong_size[0] # 캐릭터의 가로크기
 ddongddong_height = ddong_size[1] # 캐릭터의 세로크기
-ddong_x_pos = 0  #화면 가로의 절반 크기에 해당하는 곳에 위치(가로)
+ddong_x_pos = random.randint(0, screen_width - ddong_width)  #화면 가로의 절반 크기에 해당하는 곳에 위치(가로)
 ddong_y_pos = 0 # 화면 세로 크기 가장 아래에 해당하는 곳에 위치(세로)
 ddong_speed = 10
 # 이벤트 루프
@@ -72,8 +73,22 @@ while running:
         character_x_pos = screen_width - character_width
 
     ddong_y_pos += ddong_speed
-    #4. 충돌 처리
 
+    if ddong_y_pos > screen_height:
+        ddong_y_pos = 0
+        ddong_x_pos = random.randint(0, screen_width - ddong_width)
+    #4. 충돌 처리
+    character_rect = character.get_rect()
+    character_rect.left = character_x_pos
+    character_rect.top = character_y_pos
+
+    ddong_rect = ddong.get_rect()
+    ddong_rect.left = ddong_x_pos
+    ddong_rect.top = ddong_y_pos
+
+    if character_rect.colliderect(ddong_rect):
+        print("충돌했어요")
+        running = False
     
     #5. 화면의 기르기
     screen.blit(backgruound, (0, 0))
